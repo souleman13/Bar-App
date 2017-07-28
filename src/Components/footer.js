@@ -11,7 +11,7 @@ export default class extends Component {
         return(
             <div>
 
-
+            <h3>footer</h3>
 
             </div>
         );

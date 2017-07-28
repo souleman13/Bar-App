@@ -10,7 +10,7 @@ export default class extends Component {
         return(
             <div>
 
-
+                <h3>search results</h3>
 
             </div>
         );

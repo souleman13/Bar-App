@@ -1,5 +1,5 @@
 /**
- * Created by Douglas on 7/27/2017.
+ * Created by Douglas on 7/28/2017.
  */
 import React, {Component} from 'react';
 
@@ -10,7 +10,7 @@ export default class extends Component {
         return(
             <div>
 
-
+                <h3>search params</h3>
 
             </div>
         );

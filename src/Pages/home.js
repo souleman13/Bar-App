@@ -9,9 +9,8 @@ export default class extends Component {
 
         return(
             <div>
-
-
-
+                <h3>Tonight</h3>
+                <h3>Favorites</h3>
             </div>
         );
     }

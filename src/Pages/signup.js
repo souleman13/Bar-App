@@ -10,7 +10,7 @@ export default class extends Component {
         return(
             <div>
 
-
+                <h3>sign up</h3>
 
             </div>
         );
