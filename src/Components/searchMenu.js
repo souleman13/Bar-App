@@ -10,7 +10,7 @@ export default class extends Component {
         return(
             <div>
 
-                <h3>search params</h3>
+                <h1>Search Menu</h1>
 
             </div>
         );
