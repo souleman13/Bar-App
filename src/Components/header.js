@@ -47,7 +47,7 @@ export default class extends Component {
                 <Drawer
                     docked={false}
                     openSecondary={true}
-                    width={300}
+                    width={400}
                     open={this.state.openSearch}
                     onRequestChange={(openSearch) => this.setState({openSearch})}
                 >
