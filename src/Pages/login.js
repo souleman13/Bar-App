@@ -2,8 +2,9 @@
  * Created by Douglas on 7/27/2017.
  */
 import React, {Component} from 'react';
+import { gql, graphql } from 'react-apollo';
 
-export default class extends Component {
+class login extends Component {
 
     render(){
 
@@ -16,3 +17,8 @@ export default class extends Component {
         );
     }
 }
+export default graphql(gql`
+  
+  
+  
+`)(login);

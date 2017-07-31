@@ -6,9 +6,10 @@ import SelectField from 'material-ui/SelectField'
 import MenuItem from 'material-ui/MenuItem'
 import Checkbox from 'material-ui/Checkbox'
 import Slider from 'material-ui/Slider'
+import { gql, graphql } from 'react-apollo';
 
 
-export default class extends Component {
+class searchMenu extends Component {
 
     state = {
         slider: 10,
@@ -28,11 +29,11 @@ export default class extends Component {
 
         return(
             <div>
-
                 <h1>Search Menu</h1>
-
                 <form action="">
-
+                    <fieldset>
+                        <input type="text" placeholder="ZIP, address or name"/>
+                    </fieldset>
                     <fieldset >
                         <SelectField
                             floatingLabelText="kind"
@@ -67,6 +68,8 @@ export default class extends Component {
 
                         <Checkbox label="Sports"/>
 
+                        <Checkbox label="eSports"/>
+
                         <Checkbox label="Not Bar"/>
                     </fieldset>
 
@@ -82,7 +85,7 @@ export default class extends Component {
                         <h3>Distance: {this.state.slider}</h3>
                     </fieldset>
                     <fieldset>
-                        <button type="submit" href="/search">Submit</button>
+                        <button type="submit">Submit</button>
                         <button type="reset">Reset</button>
                     </fieldset>
 
@@ -92,3 +95,8 @@ export default class extends Component {
         );
     }
 }
+export default graphql(gql`
+  
+  
+  
+`)(searchMenu);
