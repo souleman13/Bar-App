@@ -30,7 +30,7 @@ class searchMenu extends Component {
         return(
             <div>
                 <h1>Search Menu</h1>
-                <form action="">
+                <form>
                     <fieldset>
                         <input type="text" placeholder="ZIP, address or name"/>
                     </fieldset>
@@ -85,7 +85,7 @@ class searchMenu extends Component {
                         <h3>Distance: {this.state.slider}</h3>
                     </fieldset>
                     <fieldset>
-                        <button type="submit">Submit</button>
+                        <button type="submit" href="/search">Submit</button>
                         <button type="reset">Reset</button>
                     </fieldset>
 
@@ -95,8 +95,17 @@ class searchMenu extends Component {
         );
     }
 }
+
+
 export default graphql(gql`
   
-  
+  {
+  allVenues{
+    name
+    events{
+      name
+    }
+  }
+}
   
 `)(searchMenu);

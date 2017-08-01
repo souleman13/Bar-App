@@ -18,7 +18,12 @@ class signup extends Component {
     }
 }
 export default graphql(gql`
-  
-  
-  
+  {
+  allVenues{
+    name
+    events{
+      name
+    }
+  }
+}
 `)(signup);

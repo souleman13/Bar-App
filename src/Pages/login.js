@@ -19,6 +19,9 @@ class login extends Component {
 }
 export default graphql(gql`
   
-  
-  
+  {
+  allUsers{
+    name
+  }
+}
 `)(login);
