@@ -60,7 +60,6 @@ export default class extends Component {
                     </fieldset>
 
                         <button type="submit" href="/search">Submit</button>
-                        <button type="reset">Reset</button>
 
                 </form>
 
