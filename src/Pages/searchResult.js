@@ -8,27 +8,26 @@ class searchResult extends Component {
 
     render() {
 
-        console.log(this.props.data);
-        const {loading, allVenues} = this.props.data;
-
         return (
             <div>
 
                 <h3>search results</h3>
-                {!loading && allVenues.map(venue => (
-                    <div key={venue.id}>
-                        <h3>{venue.name}</h3>
-                        {venue.ageLimit}
-                        {venue.hours}
-                        <p>Events</p>
-                        {venue.events.map(event => (
-                            <div key={event.id}>
-                                {event.name}
-                            </div>
-                        ))}
 
-                    </div>
-                ))}
+                {/*Test on mock data*/}
+                {/*{!loading && allVenues.map(venue => (*/}
+                    {/*<div key={venue.id}>*/}
+                        {/*<h3>{venue.name}</h3>*/}
+                        {/*{venue.ageLimit}*/}
+                        {/*{venue.hours}*/}
+                        {/*<p>Events</p>*/}
+                        {/*{venue.events.map(event => (*/}
+                            {/*<div key={event.id}>*/}
+                                {/*{event.name}*/}
+                            {/*</div>*/}
+                        {/*))}*/}
+
+                    {/*</div>*/}
+                {/*))}*/}
 
             </div>
         );

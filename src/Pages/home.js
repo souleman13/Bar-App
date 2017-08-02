@@ -8,16 +8,10 @@ class home extends Component {
 
     render(){
 
-        const { loading, allVenues } = this.props.data;
-
         return(
             <div>
                 <h3>Tonight</h3>
-                {!loading && allVenues.map(venue => (
-                    <div key={venue.id}>
-                        {venue.name}
-                    </div>
-                ))}
+
                 <h3>Favorites</h3>
 
             </div>
