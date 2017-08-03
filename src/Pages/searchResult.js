@@ -14,7 +14,12 @@ class searchResult extends Component {
 
         const urlSplit = window.location.href.split('?');
         const queryString = urlSplit[1];
-        console.log(queryString);
+        const params = qs.parse(queryString);
+
+        console.log(params.zip);
+        console.log(params.distance);
+        console.log(params.eSports);
+        console.log(params.sports);
 
         return (
             <div>
@@ -24,7 +29,8 @@ class searchResult extends Component {
 
 
 
-                {/*Test on mock data*/}
+                {/*Test to make sure mock data shows*/}
+                <hr/>
                 {!loading && allVenues.map(venue => (
                     <div key={venue.id}>
                         <h3>{venue.name}</h3>

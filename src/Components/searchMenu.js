@@ -16,13 +16,16 @@ export default class extends Component {
                 <h1>Search Menu</h1>
                 <form action="/search" method="get">
                     <fieldset>
+                        <select name="type">
+                            <option>Venue</option>
+                            <option>Event</option>
+                        </select>
+                    </fieldset>
+                    <fieldset>
                         <input type="text" placeholder="ZIP, address or name" name="zip"/>
                     </fieldset>
                     <fieldset >
-                        <select
-                            name="kind"
-
-                        >
+                        <select name="kind">
                             <option>Bar</option>
                             <option>Restaurant</option>
                             <option>Club</option>

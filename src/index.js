@@ -4,7 +4,14 @@ import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 import TouchTapPlugin from 'react-tap-event-plugin'
 
-import { ApolloProvider, ApolloClient, createNetworkInterface } from 'react-apollo';
+import {InstantSearch} from 'react-instantsearch/dom'
+
+
+import {
+    ApolloProvider,
+    ApolloClient,
+    createNetworkInterface
+} from 'react-apollo';
 
 import theme from 'material-ui/styles/baseThemes/lightBaseTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
@@ -18,9 +25,15 @@ const client = new ApolloClient({
 
 const Wrapped = (
     <ApolloProvider client={client}>
-        <MuiThemeProvider muiTheme={getMuiTheme(theme)}>
-            <App/>
-        </MuiThemeProvider>
+        <InstantSearch
+        appId="8E11F0HYIO"
+        apiKey="587a194fba4c0e2ce48c15b5ab040912"
+        indexName="Venues"
+        >
+            <MuiThemeProvider muiTheme={getMuiTheme(theme)}>
+                <App/>
+            </MuiThemeProvider>
+        </InstantSearch>
     </ApolloProvider>
 );
 
