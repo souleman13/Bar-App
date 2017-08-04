@@ -25,7 +25,6 @@ export default class extends Component {
                     iconElementRight={<FontIcon className="fa fa-search" aria-hidden="true"/>}
                     onLeftIconButtonTouchTap={e => this.setState({open: !this.state.open})}
                     onRightIconButtonTouchTap={e => this.setState({openSearch: !this.state.openSearch})}
-
                 />
                 {/*nav menu*/}
                 <Drawer
