@@ -6,9 +6,9 @@ import React from 'react';
 export default ({hit}) => (
     <div>
         <h3>{hit.name}<br/></h3>
-        {hit.hours}<br/>
         {hit.kind}<br/>
-        
+        {hit.hours}<br/>
+
         <hr/>
     </div>
 )

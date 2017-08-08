@@ -15,10 +15,10 @@ export default class extends Component {
 
     render(){
 
-
-
         return(
+
             <div>
+
                 <h1>Search Menu</h1>
 
                 <SearchBox/>
@@ -28,13 +28,14 @@ export default class extends Component {
                         { value: 'Venues', label: 'Venues' },
                         { value: 'Events', label: 'Events' },
                     ]}
+
                     defaultRefinement="Venues"
                 />
 
                 <Toggle
                     attributeName="sports"
                     label="Sports on TV"
-                    value={"True"}
+                    value={'True'}
                 />
 
                 <Toggle
