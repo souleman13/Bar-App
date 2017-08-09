@@ -17,9 +17,6 @@ class searchResult extends Component {
         return (
             <div>
 
-                <h3>search results</h3>
-                <hr/>
-
                 <Hits hitComponent={Venue} />
 
             </div>

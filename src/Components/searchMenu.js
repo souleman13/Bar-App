@@ -7,6 +7,7 @@ import {
     SearchBox,
     Toggle,
     SortBy,
+    RefinementList
 } from 'react-instantsearch/dom'
 
 export default class extends Component {
@@ -23,36 +24,17 @@ export default class extends Component {
 
                 <SearchBox/>
 
-                <SortBy
-                    items={[
-                        { value: 'Venues', label: 'Venues' },
-                        { value: 'Events', label: 'Events' },
-                    ]}
+                Type of Venue:
+                <RefinementList attributeName="kind" />
 
-                    defaultRefinement="Venues"
-                />
-
-                <Toggle
-                    attributeName="sports"
-                    label="Sports on TV"
-                    value={'True'}
-                />
-
-                <Toggle
-                    attributeName="eSports"
-                    label="eSports on TV"
-                    value={'True'}
-                />
+                Kinds of Events:
+                <RefinementList attributeName="events.kind" />
 
                 <Toggle
                     attributeName="alcohol"
-                    label="Alcohol"
-                    value={'True'}
+                    label="No Alcohol"
+                    value={'False'}
                 />
-
-                <div>
-                    <button><a href="/search">Results</a></button>
-                </div>
 
             </div>
         );

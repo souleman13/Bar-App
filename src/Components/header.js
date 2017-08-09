@@ -35,18 +35,14 @@ export default class extends Component {
                 >
                     {/*drawer content*/}
                     <MenuItem href='/'>Home</MenuItem>
-                    <MenuItem href='/'>Profile</MenuItem>
-                    <MenuItem href='/'>Popular Searches</MenuItem>
-                    <MenuItem href='/'>Popular Near You</MenuItem>
-                    <MenuItem href='/'>Fav Bars</MenuItem>
-                    <MenuItem href='/'>Fav Searches</MenuItem>
+                    <MenuItem href='/user'>Profile</MenuItem>
                 </Drawer>
 
                 {/*search menu*/}
                 <Drawer
                     docked={false}
                     openSecondary={true}
-                    width={400}
+                    width={300}
                     open={this.state.openSearch}
                     onRequestChange={(openSearch) => this.setState({openSearch})}
                 >

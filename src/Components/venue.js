@@ -5,10 +5,10 @@ import React from 'react';
 
 export default ({hit}) => (
     <div>
-        <h3>{hit.name}<br/></h3>
-        {hit.kind}<br/>
+        <span><strong>{hit.name}</strong> - {hit.kind.join(' ')}<br/></span>
         {hit.hours}<br/>
-
+        <div>{hit.address}</div>
+        <div>{hit.city} {hit.state} {hit.zip}</div>
         <hr/>
     </div>
 )
