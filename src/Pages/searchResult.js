@@ -2,13 +2,13 @@
  * Created by Douglas on 7/27/2017.
  */
 import React, {Component} from 'react';
-import {gql, graphql} from 'react-apollo';
+// import {gql, graphql} from 'react-apollo';
 
-import {Hits} from 'react-instantsearch/dom'
+import {Hits, Pagination, SearchBox} from 'react-instantsearch/dom'
 
 import Venue from '../Components/venue'
 
-class searchResult extends Component {
+export default class extends Component {
 
 
     render() {
@@ -17,25 +17,13 @@ class searchResult extends Component {
         return (
             <div>
 
+                <SearchBox/>
+
                 <Hits hitComponent={Venue} />
+
+                <Pagination />
 
             </div>
         );
     }
 }
-export default graphql(gql`
-
-  {
-  allVenues{
-    id
-    name
-    ageLimit
-    hours
-    events{
-      name
-      id
-    }
-  }
-}
-
-`)(searchResult);

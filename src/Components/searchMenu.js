@@ -6,7 +6,6 @@ import React, {Component} from 'react';
 import {
     SearchBox,
     Toggle,
-    SortBy,
     RefinementList
 } from 'react-instantsearch/dom'
 

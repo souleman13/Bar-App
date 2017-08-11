@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import './App.css';
 
 import Routing from './Routing'
 import Header from './Components/header'
@@ -11,7 +10,7 @@ export default class App extends Component {
 
     return (
 
-      <div className="App">
+      <div>
 
         <Header/>
 
