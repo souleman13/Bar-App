@@ -9,6 +9,9 @@ import FontIcon from 'material-ui/FontIcon'
 
 import SearchMenu from './searchMenu';
 
+import Auth from '../Auth/Auth'
+
+
 export default class extends Component {
 
     state ={
@@ -17,7 +20,11 @@ export default class extends Component {
     };
 
  render(){
-        return(
+
+
+     const auth = new Auth();
+
+     return(
             <div>
 
                 <AppBar
@@ -36,6 +43,7 @@ export default class extends Component {
                     {/*drawer content*/}
                     <MenuItem href='/'>Home</MenuItem>
                     <MenuItem href='/user'>Profile</MenuItem>
+                    <MenuItem onClick={e => auth.login()}>Login</MenuItem>
                 </Drawer>
 
                 {/*search menu*/}
