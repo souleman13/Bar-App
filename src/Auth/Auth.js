@@ -1,12 +1,14 @@
 import auth0 from 'auth0-js';
 import history from '../history'
 
-export default class Auth {
+import createUser from './createUser'
+
+class Auth {
 
     auth0 = new auth0.WebAuth({
         domain: 'souleman13.auth0.com',
         clientID: 'ocYCo4iED7d02rEC0TVPtUHNc5KXic0M',
-        redirectUri: 'http://localhost:3000',
+        redirectUri: 'http://localhost:3000/callback',
         audience: 'https://souleman13.auth0.com/userinfo',
         responseType: 'token id_token',
         scope: 'openid'
@@ -23,6 +25,7 @@ export default class Auth {
         this.auth0.parseHash((err, authResult) => {
             if (authResult && authResult.accessToken && authResult.idToken) {
                 this.setSession(authResult);
+                createUser()
                 history.replace('/');
             } else if (err) {
                 history.replace('/');
@@ -53,11 +56,19 @@ export default class Auth {
     isAuthenticated() {
         // Check whether the current time is past the
         // access token's expiry time
-        let expiresAt = JSON.parse(localStorage.getItem('expires_at'));
-        return new Date().getTime() < expiresAt;
+
+        try {
+            let expiresAt = JSON.parse(localStorage.getItem('expires_at'));
+            return !(new Date().getTime() < expiresAt);
+        } catch(ex) {
+            console.log(ex);
+            return false;
+        }
     }
 
     login() {
         this.auth0.authorize();
     }
 }
+
+export default Auth;

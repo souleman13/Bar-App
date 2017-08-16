@@ -8,21 +8,33 @@ import MenuItem from 'material-ui/MenuItem';
 import FontIcon from 'material-ui/FontIcon'
 
 import SearchMenu from './searchMenu';
-
 import Auth from '../Auth/Auth'
 
 
 export default class extends Component {
+
+    constructor(props) {
+        super(props);
+        this.auth = new Auth();
+
+    }
 
     state ={
         open: false,
         openSearch: false,
     };
 
+    login() {
+        this.auth.login();
+    }
+
+    logout() {
+        this.auth.logout();
+    }
+
  render(){
 
-
-     const auth = new Auth();
+     const { isAuthenticated } = this.auth;
 
      return(
             <div>
@@ -43,7 +55,15 @@ export default class extends Component {
                     {/*drawer content*/}
                     <MenuItem href='/'>Home</MenuItem>
                     <MenuItem href='/user'>Profile</MenuItem>
-                    <MenuItem onClick={e => auth.login()}>Login</MenuItem>
+                    {
+                        isAuthenticated() ? (
+                            <MenuItem onClick={this.login.bind(this)}>Log In</MenuItem>
+                        ) : (
+                            <MenuItem onClick={this.logout.bind(this)}>Log Out</MenuItem>
+                        )
+                    }
+
+
                 </Drawer>
 
                 {/*search menu*/}
@@ -57,7 +77,6 @@ export default class extends Component {
                     {/*drawer content*/}
                     <SearchMenu />
                 </Drawer>
-
             </div>
         );
     }
