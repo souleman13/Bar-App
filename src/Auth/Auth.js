@@ -21,12 +21,13 @@ class Auth {
         this.isAuthenticated = this.isAuthenticated.bind(this);
     }
 
-    handleAuthentication() {
-        this.auth0.parseHash((err, authResult) => {
+   handleAuthentication() {
+         this.auth0.parseHash((err, authResult) => {
             if (authResult && authResult.accessToken && authResult.idToken) {
-                this.setSession(authResult);
-                createUser()
-                history.replace('/');
+                return createUser(authResult.idToken).then(p => {
+                    this.setSession(authResult);
+                    history.replace('/');
+                }).catch(err => console.log);
             } else if (err) {
                 history.replace('/');
                 console.log(err);

@@ -4,13 +4,19 @@
 import {gql} from 'react-apollo'
 import {client} from '../config/apolloConfig'
 
-export default async(idToken) => {
-    await client.mutate({
-        mutate: gql`
-  mutation ($idToken: String!){
-    createUser(authProvider: {auth0: {idToken: $idToken}}) {
-      id
-    }}`
+const createUserMutation = gql`
+ mutation ($idToken: String!){
+    createUser(authProvider: {auth0: {idToken: $idToken}}){
+        id
+        createdAt
+        updatedAt
+    }}`;
+
+export default async (idToken) => {
+    return await client.mutate({
+        mutation: createUserMutation,
+        variables:{
+            idToken
+        }
     })
 }
-
