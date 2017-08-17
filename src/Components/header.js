@@ -5,43 +5,24 @@ import React, {Component} from 'react';
 import AppBar from 'material-ui/AppBar';
 import Drawer from 'material-ui/Drawer';
 import MenuItem from 'material-ui/MenuItem';
-import FontIcon from 'material-ui/FontIcon'
-
 import SearchMenu from './searchMenu';
-import Auth from '../Auth/Auth'
 
+import { login, isAuthenticated, logout } from '../config/Auth/index'
 
 export default class extends Component {
-
-    constructor(props) {
-        super(props);
-        this.auth = new Auth();
-
-    }
 
     state ={
         open: false,
         openSearch: false,
     };
 
-    login() {
-        this.auth.login();
-    }
-
-    logout() {
-        this.auth.logout();
-    }
-
  render(){
-
-     const { isAuthenticated } = this.auth;
 
      return(
             <div>
-
                 <AppBar
                     title="Bar App"
-                    iconElementRight={<FontIcon className="fa fa-search" aria-hidden="true"/>}
+                    iconElementRight={<i className="fa fa-search" aria-hidden="true"/>}
                     onLeftIconButtonTouchTap={e => this.setState({open: !this.state.open})}
                     onRightIconButtonTouchTap={e => this.setState({openSearch: !this.state.openSearch})}
                 />
@@ -56,13 +37,10 @@ export default class extends Component {
                     <MenuItem href='/'>Home</MenuItem>
                     <MenuItem href='/user'>Profile</MenuItem>
                     {
-                        isAuthenticated() ? (
-                            <MenuItem onClick={this.login.bind(this)}>Log In</MenuItem>
-                        ) : (
-                            <MenuItem onClick={this.logout.bind(this)}>Log Out</MenuItem>
-                        )
-                    }
+                        isAuthenticated() ?
+                            <MenuItem onClick={e=> logout()}>Log Out</MenuItem> : <MenuItem onClick={e=> login()}>Log In</MenuItem>
 
+                    }
 
                 </Drawer>
 

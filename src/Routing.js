@@ -8,32 +8,26 @@ import {
     Switch
 } from 'react-router-dom';
 
-import history from './history';
-import Callback from './Callback/Callback';
-import Auth from './Auth/Auth';
+import {handleAuthentication} from './config/Auth/index';
 
 import NotFound from './Pages/notFound'
 import Search from './Pages/searchResult'
 
-const auth = new Auth();
-
-const handleAuthentication = (nextState,replace) => {
-    if (/access_token|id_token|error/.test(nextState.location.hash)) {
-        auth.handleAuthentication();
-    }
-};
-
 export default () => (
-    <Router  history={history} >
+    <Router>
         <Switch>
-            <Route path="/" render={(props) => <Search auth={auth} {...props} />} />
 
-            <Route path="/callback" render={(props) => {
-                debugger;
+            <Route path="/" component={Search} />
+
+            <Route exact path="/callback" component={(props) => {
+                console.log(props);
                 handleAuthentication(props);
-                return <Callback {...props} />
-            }}/>
+                window.location = '/';
+                return null
+            }} />
+
             <Route component={NotFound}/>
+
         </Switch>
     </Router>
 )
