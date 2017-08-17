@@ -8,13 +8,13 @@ import {Client} from '../apolloConfig';
 import {gql} from 'react-apollo'
 
 
-const MUTATION = gql`
-    mutation($idToken: String!) {
-        createUser(authProvider: { auth0: { idToken: $idToken } }) {
-            id
-        }
-    }
-`;
+// const MUTATION = gql`
+//     mutation($idToken: String!) {
+//         createUser(authProvider: { auth0: { idToken: $idToken } }) {
+//             id
+//         }
+//     }
+// `;
 
 const KEYS = {
     accessToken: 'access_token',
@@ -47,7 +47,7 @@ const lock = new AuthLock(Configuration.clientID, Configuration.domain, {
 const parse = async () => new Promise((resolve, reject) => {
     return auth.parseHash((err, result) => {
         if (err) return reject(err);
-        
+
         if (result && result.accessToken && result.idToken) {
             const { accessToken, idToken, expiresIn } = result;
 
@@ -65,12 +65,12 @@ const configure = async ({ expiresIn, accessToken, idToken }) => {
         Storage.save(KEYS.accessToken, accessToken),
         Storage.save(KEYS.idToken, idToken),
         Storage.save(KEYS.expiresAt, expiresAt),
-        Promise.resolve(Client.mutate({
-            mutation: MUTATION,
-            variables: {
-                idToken,
-            },
-        }))
+        // Promise.resolve(Client.mutate({
+        //     mutation: MUTATION,
+        //     variables: {
+        //         idToken,
+        //     },
+        // }))
     ])
 };
 
