@@ -38,7 +38,7 @@ export default class extends Component {
                     <MenuItem href='/user'>Profile</MenuItem>
                     {
                         isAuthenticated() ?
-                            <MenuItem onClick={e=> logout()}>Log Out</MenuItem> : <MenuItem onClick={e=> login()}>Log In</MenuItem>
+                            <MenuItem onClick={e=> logout()}>Log Out</MenuItem> : <MenuItem href="/login">Log In</MenuItem>
 
                     }
 

@@ -2,23 +2,30 @@ import * as Storage from './storage'
 import {Client} from '../apolloConfig'
 import {gql} from 'react-apollo'
 
-const createUser = gql`
+const createUserMutation = gql`
     mutation($email: String!, $password: String!) {
-        createUser(authProvider: { email: {email: $email, password::$password}) {
+        createUser(authProvider: { email: {email: $email, password:$password}) {
             id
         }}`
 
-const signinUser = gql`
+const signinUserMutation = gql`
     mutation ($email: String!, $password: String!) {
         signinUser(email:{email: $email, password:$password}){
             id
         }}`
 
-export const login = (email, password) => {
-    signinUser({variables: {email, password}})
+export const creatUser = (email, password) => {
+    createUserMutation({variables:{email, password}})
         .then((response) => {
-        Storage.save('token', response.data.signinUser.token)
-        })
+            Storage.save('token', response.data.createUser.token)})
+        .catch(err => console.log(err))
+}
+
+export const login = (email, password) => {
+    signinUserMutation({variables: {email, password}})
+        .then((response) => {
+        Storage.save('token', response.data.signinUser.token)})
+        .catch(err => console.log(err))
 }
 
 export const logout = () => {
@@ -29,7 +36,8 @@ export const logout = () => {
 
 export const isAuthenticated = () => {
     try {
-        
+        if (!Storage.itemByKey('token')) return false
+        return true
     } catch (err) {
         console.error(err)
         return false
