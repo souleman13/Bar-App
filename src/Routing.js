@@ -4,8 +4,6 @@
 import React from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 
-import { handleAuthentication } from './config/Auth/index'
-
 import NotFound from './Pages/notFound'
 import Search from './Pages/searchResult'
 
@@ -14,12 +12,6 @@ export default () => (
     <Switch>
 
       <Route exact path="/" component={Search} />
-
-      <Route exact path="/callback" component={(props) => {
-        handleAuthentication(props)
-        window.location = '/'
-        return null
-      }} />
 
       <Route component={NotFound} />
 

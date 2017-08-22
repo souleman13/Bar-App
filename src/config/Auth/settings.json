@@ -1,8 +1,0 @@
-{
-  "domain": "souleman13.auth0.com",
-  "clientID": "ocYCo4iED7d02rEC0TVPtUHNc5KXic0M",
-  "redirectUri": "http://localhost:3000/callback",
-  "audience": "https://souleman13.auth0.com/userinfo",
-  "responseType": "token id_token",
-  "scope": "openid"
-}
