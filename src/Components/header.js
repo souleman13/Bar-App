@@ -7,7 +7,7 @@ import Drawer from 'material-ui/Drawer';
 import MenuItem from 'material-ui/MenuItem';
 import SearchMenu from './searchMenu';
 
-import { login, isAuthenticated, logout } from '../config/Auth/index'
+import { isAuthenticated, logout } from '../config/Auth/index'
 
 export default class extends Component {
 
@@ -39,7 +39,6 @@ export default class extends Component {
                     {
                         isAuthenticated() ?
                             <MenuItem onClick={e=> logout()}>Log Out</MenuItem> : <MenuItem href="/login">Log In</MenuItem>
-
                     }
 
                 </Drawer>

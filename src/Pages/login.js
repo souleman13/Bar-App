@@ -19,25 +19,29 @@ export default class extends Component {
             <div>
 
                 <h1>LOGIN PAGE</h1>
-                <form>
+                <form onSubmit={e => {e.preventDefault()
+                    login(email,password)}}>
                     <fieldset>
                         <input name="email"
                                type="email"
                                placeholder="example@gmail.com"
-                               onChange={e => this.setState({email: e.target.value()})}
+                               value={email}
+                               onChange={e => this.setState({email: e.target.value})}
                         />
                     </fieldset>
                     <fieldset>
                         <input name="password"
                                type="password"
                                placeholder="********"
-                               onChange={e => this.setState({password: e.target.value()})}
+                               value={password}
+                               onChange={e => this.setState({password: e.target.value})}
                         />
                     </fieldset>
                     <fieldset>
-                        <input type="submit" onClick={login(email,password)}/>
+                        <button type="submit">login</button>
                     </fieldset>
                 </form>
+                <button><a href="/signup">Sign-up</a></button>
 
             </div>
         );

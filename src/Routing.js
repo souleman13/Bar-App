@@ -7,6 +7,7 @@ import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
 import NotFound from './Pages/notFound'
 import Search from './Pages/searchResult'
 import Login from './Pages/login'
+import  Signup from './Pages/signup'
 
 export default () => (
     <Router>
@@ -14,7 +15,9 @@ export default () => (
 
             <Route exact path="/" component={Search}/>
 
-            <Route exact path="/" component={Login}/>
+            <Route exact path="/login" component={Login}/>
+
+            <Route exact path="/signup" component={Signup}/>
 
             <Route component={NotFound}/>
 
