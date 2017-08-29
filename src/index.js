@@ -6,7 +6,7 @@ import TouchTapPlugin from 'react-tap-event-plugin'
 
 import { InstantSearch } from 'react-instantsearch/dom'
 
-import { Client } from './config/apolloConfig'
+import { Client } from './config/GraphQL/apolloConfig'
 import { ApolloProvider } from 'react-apollo'
 
 import theme from 'material-ui/styles/baseThemes/lightBaseTheme'
