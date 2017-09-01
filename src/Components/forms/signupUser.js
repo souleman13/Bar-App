@@ -20,12 +20,10 @@ export default class extends Component {
 
         const {email, password, firstName, lastName, zip} = this.state
 
-
         return (
-        <form onSubmit={e => {
+        <form onSubmit={async e => {
             e.preventDefault()
-            createUser(email, password, firstName, lastName, zip)
-            login(email, password)
+            await createUser(email, password, firstName, lastName, zip)
         }}>
             <h3>New User</h3>
 

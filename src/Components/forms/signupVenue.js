@@ -44,17 +44,13 @@ export default class extends Component {
 
     render() {
 
-        const {kind, email, password, firstName, lastName, zip, address, city, country, state, name, ageLimit, alcohol, url, phone} = this.state
+        const {kind, email, password, zip, address, city, country, state, name, ageLimit, alcohol, url, phone} = this.state
 
 
         return (
             <form onSubmit={async e => {
                 e.preventDefault()
-                debugger
-                await createVenue(email, password, firstName, lastName, zip, kind, zip, address, city, state, country, name, ageLimit, alcohol, url, phone)
-                debugger
-                await login(email, password)
-                debugger
+                await createVenue(email, password, zip, kind, zip, address, city, state, country, name, ageLimit, alcohol, url, phone)
             }}>
 
                 <h2>New Venue</h2>
@@ -107,7 +103,7 @@ export default class extends Component {
                            type="number"
                            placeholder="12345"
                            value={zip}
-                           onChange={e => this.setState({zip: e.target.value})}
+                           onChange={e => this.setState({zip: parseInt(e.target.value)})}
                     />
                     <input name="phone"
                            type="tel"
@@ -140,7 +136,7 @@ export default class extends Component {
                     <input name="ageLimit"
                            type="number"
                            value={ageLimit}
-                           onChange={e => this.setState({ageLimit: e.target.value})}
+                           onChange={e => this.setState({ageLimit: parseInt(e.target.value)})}
                     />
 
                     <label htmlFor="alcohol">Does this venue serve alcohol?</label>
@@ -148,7 +144,7 @@ export default class extends Component {
                            type="checkbox"
                            defaultChecked={true}
                            value={alcohol}
-                           onChange={e => this.setState({alcohol: e.target.value})}
+                           onChange={e => this.setState({alcohol: e.target.checked})}
                     />
                 </fieldset>
 

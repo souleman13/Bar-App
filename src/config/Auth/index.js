@@ -1,8 +1,6 @@
 import * as Storage from './storage'
 import {Client} from '../GraphQL/apolloConfig'
 import {
-    bindUserVenue,
-    bindEventVenue,
     createUserMutation,
     signinUserMutation,
     createVenueMutation,
@@ -10,8 +8,8 @@ import {
 } from '../GraphQL/mutations'
 
 
-export const createUser = (email, password, firstName, lastName, zip) => {
-    Client.mutate({
+export const createUser = async (email, password, firstName, lastName, zip) => {
+    await Client.mutate({
         mutation: createUserMutation,
         variables: {
             email,
@@ -21,6 +19,7 @@ export const createUser = (email, password, firstName, lastName, zip) => {
             zip
         }
     })
+        .then(login(email, password))
         .catch(err => console.log(err))
 }
 
@@ -30,8 +29,7 @@ export const login = (email, password) => {
         variables: {
             email,
             password
-        }
-    })
+        }})
         .then((response) => {
             Storage.save('token', response.data.signinUser.token)
             window.location.replace('/')
@@ -39,44 +37,29 @@ export const login = (email, password) => {
         .catch(err => console.log(err))
 }
 
-export const createVenue = async (email, password, firstName, lastName, zip, address, city, state, country, name, ageLimit, alcohol, url, phone) => {
-    debugger
-    let venueID = ''
-    let userID = ''
-    debugger
-    await createUser(email, password, firstName, lastName, zip)
-        .then((response) => {
-            userID = response.data.createUser.id
-        })
-        .catch(err => console.log(err))
-    debugger
+export const createVenue = async (email, password, zip, kind, address, city, state, country, name, ageLimit, alcohol, url, phone) => {
     await Client.mutate({
         mutation: createVenueMutation,
         variables: {
-            zip,
-            address,
-            city,
-            state,
-            country,
-            name,
-            ageLimit,
-            alcohol,
-            url,
-            phone
-        }
-    })
-        .then((response) => {
-            venueID = response.data.createVenue.id
-        })
+            venue: {
+                kind,
+                zip,
+                address,
+                city,
+                state,
+                country,
+                name,
+                alcohol,
+                ageLimit,
+                url,
+                phone
+            },
+            email,
+            password,
+            zip
+        }})
+        .then(login(email, password))
         .catch(err => console.log(err))
-    debugger
-    await Client.mutate({
-        mutation: bindUserVenue,
-        variables: {
-            userID,
-            venueID
-        }
-    })
 }
 
 export const createEvent = async (venueID, name, kind, description, date, ageLimit, recurring) => {
@@ -91,17 +74,7 @@ export const createEvent = async (venueID, name, kind, description, date, ageLim
             recurring
         }
     })
-        .then(async (response) => {
-            const eventID = response.data.createEvent.id
-            await Client.mutate({
-                mutation: bindEventVenue,
-                variables: {
-                    venueID,
-                    eventID
-                }
-            })
-            window.location.replace('/profile')
-        })
+        .then(window.location.replace('/profile'))
         .catch(err => console.log(err))
 }
 
