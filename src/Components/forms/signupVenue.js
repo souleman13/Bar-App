@@ -2,34 +2,60 @@
  * Created by Douglas on 8/24/2017.
  */
 import React, {Component} from 'react'
-import {createUser} from '../config/Auth/'
+import SelectField from 'material-ui/SelectField'
+import MenuItem from 'material-ui/MenuItem'
+
+import {createVenue, login} from '../../config/Auth/index'
+import {Kind_Of_Venue} from '../../config/GraphQL/enums'
 
 export default class extends Component {
 
     state = {
+        kind:[],
         email: '',
         password: '',
         firstName: '',
         lastName: '',
         zip: '',
-        address:'',
-        city:'',
-        state:'',
-        country:'US',
-        name:'',
+        address: '',
+        city: '',
+        state: '',
+        country: 'US',
+        name: '',
         ageLimit: 0,
-        alcohol:true,
-        url:'',
-        phone:'',
+        alcohol: true,
+        url: '',
+        phone: ''
     }
 
-    render(){
+    handleKindChange = (event, index, kind) => this.setState({kind})
 
-        const {email, password, firstName, lastName, zip, address, city, country, state, name, ageLimit, alcohol, url, phone} = this.state
+    kindsOfVenue(kinds){
+        return Kind_Of_Venue.map(kind => (
+            <MenuItem
+                key={kind}
+                insetChildren={true}
+                checked={kinds && kinds.indexOf(kind) > -1}
+                value={kind}
+                primaryText={kind}
+            />
+        ))
+    }
+
+    render() {
+
+        const {kind, email, password, firstName, lastName, zip, address, city, country, state, name, ageLimit, alcohol, url, phone} = this.state
+
 
         return (
-            <form onSubmit={e =>{e.preventDefault()
-                createUser(email, password, firstName, lastName, zip)}}>
+            <form onSubmit={async e => {
+                e.preventDefault()
+                debugger
+                await createVenue(email, password, firstName, lastName, zip, kind, zip, address, city, state, country, name, ageLimit, alcohol, url, phone)
+                debugger
+                await login(email, password)
+                debugger
+            }}>
 
                 <h2>New Venue</h2>
                 <hr/>
@@ -98,7 +124,18 @@ export default class extends Component {
                 </fieldset>
 
                 <fieldset>
+                    Kind of Venue:
+                    <SelectField
+                        multiple={true}
+                        hintText="max 2"
+                        value={kind}
+                        onChange={this.handleKindChange}
+                    >
+                        {this.kindsOfVenue(kind)}
+                    </SelectField>
+                </fieldset>
 
+                <fieldset>
                     <label htmlFor="ageLimit">Does this venue have an age limit?</label>
                     <input name="ageLimit"
                            type="number"
@@ -112,22 +149,6 @@ export default class extends Component {
                            defaultChecked={true}
                            value={alcohol}
                            onChange={e => this.setState({alcohol: e.target.value})}
-                    />
-                </fieldset>
-
-                <h4>Boss-Man Information (optional):</h4>
-                <fieldset>
-                    <input name="firstName"
-                           type="text"
-                           placeholder="Ray"
-                           value={firstName}
-                           onChange={e => this.setState({firstName: e.target.value})}
-                    />
-                    <input name="lastName"
-                           type="text"
-                           placeholder="Charles"
-                           value={lastName}
-                           onChange={e => this.setState({lastName: e.target.value})}
                     />
                 </fieldset>
 

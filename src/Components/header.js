@@ -35,10 +35,13 @@ export default class extends Component {
                 >
                     {/*drawer content*/}
                     <MenuItem href='/'>Home</MenuItem>
-                    <MenuItem href='/user'>Profile</MenuItem>
                     {
                         isAuthenticated() ?
-                            <MenuItem onClick={e=> logout()}>Log Out</MenuItem> : <MenuItem href="/login">Log In</MenuItem>
+                            <div>
+                                <MenuItem href='/profile'>Profile</MenuItem>
+                                <MenuItem onClick={e=> logout()}>Log Out</MenuItem>
+                            </div>
+                            : <MenuItem href="/login">Log In</MenuItem>
                     }
 
                 </Drawer>

@@ -7,7 +7,9 @@ import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
 import NotFound from './Pages/notFound'
 import Search from './Pages/searchResult'
 import Login from './Pages/login'
-import  Signup from './Pages/signup'
+import Signup from './Pages/signup'
+import Profile from './Pages/profile'
+import createEvent from './Components/forms/createEvent'
 
 export default () => (
     <Router>
@@ -18,6 +20,10 @@ export default () => (
             <Route exact path="/login" component={Login}/>
 
             <Route exact path="/signup" component={Signup}/>
+
+            <Route exact path="/event" component={createEvent}/>
+
+            <Route exact path="/profile" component={Profile}/>
 
             <Route component={NotFound}/>
 

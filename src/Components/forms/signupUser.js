@@ -2,7 +2,7 @@
  * Created by Douglas on 8/24/2017.
  */
 import React, {Component} from 'react'
-import {createUser} from '../config/Auth/'
+import {createUser, login} from '../../config/Auth/index'
 
 
 
@@ -22,9 +22,11 @@ export default class extends Component {
 
 
         return (
-        <form onSubmit={e =>{e.preventDefault()
-            createUser(email, password, firstName, lastName, zip)}}>
-
+        <form onSubmit={e => {
+            e.preventDefault()
+            createUser(email, password, firstName, lastName, zip)
+            login(email, password)
+        }}>
             <h3>New User</h3>
 
             <fieldset>

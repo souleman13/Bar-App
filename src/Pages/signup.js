@@ -2,8 +2,8 @@
  * Created by Douglas on 8/22/2017.
  */
 import React, {Component} from 'react';
-import SignUpUser from '../Components/signupUser'
-import SignUpVenue   from '../Components/signupVenue'
+import SignUpUser from '../Components/forms/signupUser'
+import SignUpVenue   from '../Components/forms/signupVenue'
 
 export default class extends Component {
 
