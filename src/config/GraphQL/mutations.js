@@ -4,7 +4,7 @@
 import {gql} from 'react-apollo'
 
 export const createUserMutation = gql`
-    mutation($email: String!, $password: String!, $firstName: String, $lastName: String, $zip: String) {
+    mutation($email: String!, $password: String!, $firstName: String, $lastName: String, $zip: Int) {
         createUser(authProvider: { email: {email:$email, password:$password}}, firstName:$firstName, lastName:$lastName, zip:$zip) {
             id
         }}`
@@ -32,15 +32,15 @@ export const createVenueMutation = gql`
     }`
 
 export const createEventMutation = gql`
-    mutation ($venueID:EventvenueVenue, $name:String!, $kind:[Kind_Of_Event!], $description: String, $date: DateTime, $ageLimit: Int, $recurring: Boolean!){
+    mutation ($venueId:ID, $name:String!, $kind:[Kind_Of_Event!], $description: String,$ageLimit: Int, $recurring: Boolean!){
         createEvent(
+            venueId:$venueId,
             name:$name,
             kind:$kind,
             description:$description,
-            date:$date,
+#            date:$date,
             ageLimit:$ageLimit,
             recurring:$recurring
-            venue:$venueID
         ){
             id
         }}`

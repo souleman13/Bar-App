@@ -23,21 +23,22 @@ if (itemByKey('token')) {
 class CreateEvent extends Component {
 
     state = {
-        name: '',
-        ageLimit: 0,
+        name: 'name',
+        ageLimit: 21,
         date: null,
-        description: '',
+        description: 'desc',
         kind: [],
-        recurring: false,
+        recurring: false
 
     }
 
     handleDateChange = (event, date) => {
-        this.setState({date: date})}
+        this.setState({date: date})
+    }
 
     handleKindChange = (event, index, kind) => this.setState({kind})
 
-    kindsOfEvents(kinds){
+    kindsOfEvents(kinds) {
         return Kind_Of_Event.map(kind => (
             <MenuItem
                 key={kind}
@@ -49,7 +50,7 @@ class CreateEvent extends Component {
         ))
     }
 
-    render(){
+    render() {
 
         const {name, ageLimit, date, description, kind, recurring} = this.state
 
@@ -59,14 +60,17 @@ class CreateEvent extends Component {
             return <p>Loading...</p>;
         }
 
-        return(
+        return (
             <div>
 
                 <h1>Create Event</h1>
 
-                <form onSubmit={async e => {
+                <form onSubmit={e => {
                     e.preventDefault()
-                    await createEvent(User.venue.id, name,kind,description,date,ageLimit,recurring)
+                    const venueId = User.venue.id
+                    createEvent(venueId, name, kind, description, ageLimit, recurring)
+                        .then(e=>window.location.replace('/profile'))
+                        .catch(err => console.log(err))
                 }}>
                     <fieldset>
                         <input name="name"
@@ -76,13 +80,13 @@ class CreateEvent extends Component {
                                onChange={e => this.setState({name: e.target.value})}
                         />
                         <textarea name="description"
-                               placeholder="Description: Max 272 characters"
-                               value={description}
-                               onChange={e => this.setState({description: e.target.value})}
+                                  placeholder="Description: Max 272 characters"
+                                  value={description}
+                                  onChange={e => this.setState({description: e.target.value})}
                         />
+                        <label htmlFor="ageLimit">Age Limit:</label>
                         <input name="ageLimit"
                                type="number"
-                               placeholder="Age Limit"
                                value={ageLimit}
                                onChange={e => this.setState({ageLimit: parseInt(e.target.value)})}
                         />
@@ -90,7 +94,8 @@ class CreateEvent extends Component {
                     <fieldset>
                         Kind of Event:
                         <SelectField
-                            hintText="Choose One"
+                            multiple={true}
+                            hintText="Max 2"
                             value={kind}
                             onChange={this.handleKindChange}
                         >
@@ -98,9 +103,9 @@ class CreateEvent extends Component {
                         </SelectField>
                     </fieldset>
 
-                    <fieldset>
-                        <DatePicker hintText="When is your event?" value={date} onChange={this.handleDateChange} />
-                    </fieldset>
+                    {/*<fieldset>*/}
+                    {/*<DatePicker hintText="When is your event?" value={date} onChange={this.handleDateChange} />*/}
+                    {/*</fieldset>*/}
 
                     <fieldset>
                         <label htmlFor="recurring">Is this event recurring?</label>
@@ -108,7 +113,7 @@ class CreateEvent extends Component {
                                type="checkbox"
                                defaultChecked={recurring}
                                value={recurring}
-                               onChange={e => this.setState({recurring: e.target.value})}
+                               onChange={e => this.setState({recurring: e.target.checked})}
                         />
                     </fieldset>
 

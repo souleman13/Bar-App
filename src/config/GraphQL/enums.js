@@ -20,7 +20,7 @@ export const Kind_Of_Event = [
     'Festival',
     'Comedy',
     'Sports',
-    'eSports',
+    'ESports',
     'Dancing',
     'Karaoke',
     'DrinkSpecial',

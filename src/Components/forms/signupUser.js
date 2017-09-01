@@ -44,7 +44,7 @@ export default class extends Component {
                        type="number"
                        placeholder="12345"
                        value={zip}
-                       onChange={e => this.setState({zip: e.target.value})}
+                       onChange={e => this.setState({zip: parseInt(e.target.value)})}
                 />
             </fieldset>
 

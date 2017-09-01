@@ -23,14 +23,14 @@ class profile extends Component {
 
     render() {
 
-        const {User, loading} = this.props.data
+        const {User={}, loading} = this.props.data
 
         if (loading) {
             return <p>Loading...</p>;
         }
 
-        const {venue} = User
-        const {events} = venue
+        const {venue = {}} = User
+        const {events = {}} = venue
 
         return (
             <div>
@@ -58,7 +58,7 @@ class profile extends Component {
                             <button onClick={e => window.location.replace('/event')}>Create Event</button>
                             <hr/>
                             {
-                                events.length > 0  ?
+                               User.venue && events.length > 0  ?
                                     <div>
                                         {
                                             events.map(event => (

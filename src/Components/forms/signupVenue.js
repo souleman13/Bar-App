@@ -16,7 +16,7 @@ export default class extends Component {
         password: '',
         firstName: '',
         lastName: '',
-        zip: '',
+        zip: 0,
         address: '',
         city: '',
         state: '',
@@ -48,9 +48,10 @@ export default class extends Component {
 
 
         return (
-            <form onSubmit={async e => {
+            <form onSubmit={e => {
                 e.preventDefault()
-                await createVenue(email, password, zip, kind, zip, address, city, state, country, name, ageLimit, alcohol, url, phone)
+                createVenue(email, password, zip, kind, address, city, state, country, name, ageLimit, alcohol, url, phone)
+                    .then(e => window.location.replace('/login'))
             }}>
 
                 <h2>New Venue</h2>

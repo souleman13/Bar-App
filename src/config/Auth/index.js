@@ -8,8 +8,8 @@ import {
 } from '../GraphQL/mutations'
 
 
-export const createUser = async (email, password, firstName, lastName, zip) => {
-    await Client.mutate({
+export const createUser = (email, password, firstName, lastName, zip) => {
+    Client.mutate({
         mutation: createUserMutation,
         variables: {
             email,
@@ -19,7 +19,7 @@ export const createUser = async (email, password, firstName, lastName, zip) => {
             zip
         }
     })
-        .then(login(email, password))
+        .then(e=>login(email, password))
         .catch(err => console.log(err))
 }
 
@@ -38,44 +38,42 @@ export const login = (email, password) => {
 }
 
 export const createVenue = async (email, password, zip, kind, address, city, state, country, name, ageLimit, alcohol, url, phone) => {
-    await Client.mutate({
+    const result = await Client.mutate({
         mutation: createVenueMutation,
         variables: {
+            email,
+            password,
+            zip,
             venue: {
                 kind,
                 zip,
                 address,
                 city,
                 state,
-                country,
                 name,
+                country,
                 alcohol,
                 ageLimit,
                 url,
                 phone
-            },
-            email,
-            password,
-            zip
+            }
         }})
-        .then(login(email, password))
-        .catch(err => console.log(err))
+    return result
 }
 
-export const createEvent = async (venueID, name, kind, description, date, ageLimit, recurring) => {
-    await Client.mutate({
+export const createEvent = async (venueId, name, kind, description,ageLimit, recurring) => {
+    const result = await Client.mutate({
         mutation: createEventMutation,
         variables: {
+            venueId,
             name,
             kind,
             description,
-            date,
             ageLimit,
             recurring
         }
     })
-        .then(window.location.replace('/profile'))
-        .catch(err => console.log(err))
+    return result
 }
 
 export const logout = () => {

@@ -4,7 +4,6 @@
 import React, {Component} from 'react';
 import {login} from '../config/Auth/'
 
-debugger
 
 export default class extends Component {
 
