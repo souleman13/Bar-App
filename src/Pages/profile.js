@@ -23,21 +23,27 @@ class profile extends Component {
 
     render() {
 
-        const {User={}, loading} = this.props.data
+        const {User = {}, loading} = this.props.data
 
         if (loading) {
             return <p>Loading...</p>;
         }
 
-        const {venue = {}} = User
-        const {events = {}} = venue
+        let venue = {}
+        let events = []
+
+        if(User.venue) {
+            venue = User.venue
+            events = venue.events
+        }
+
 
         return (
             <div>
 
                 <h1>Profile</h1>
                 {
-                    venue ?
+                    User.venue ?
                         <div>
                             <div>{venue.name}</div>
                             <div>{User.email}</div>
