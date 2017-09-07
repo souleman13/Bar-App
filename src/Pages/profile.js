@@ -71,7 +71,9 @@ class profile extends Component {
                                                 <div key={event.id}>
                                                     <div>{event.name}</div>
                                                     <div>{event.kind.join(' ')}</div>
-                                                    <div>{event.date}</div>
+                                                    <div>{event.date ? event.date.split('T',1):null}</div>
+                                                    <div>From: {}</div>
+                                                    <div>To: {}</div>
                                                     <button>edit</button>
                                                     <hr/>
                                                 </div>

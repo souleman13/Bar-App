@@ -2,8 +2,8 @@
  * Created by Douglas on 8/30/2017.
  */
 import React, {Component} from 'react'
+import jwt from 'jsrsasign'
 
-import DatePicker from 'material-ui/DatePicker'
 import MenuItem from 'material-ui/MenuItem'
 import SelectField from 'material-ui/SelectField'
 
@@ -12,7 +12,6 @@ import {itemByKey} from '../../config/Auth/storage'
 import {createEvent} from '../../config/Auth/index'
 import {getIDs} from '../../config/GraphQL/query'
 import {graphql} from 'react-apollo'
-import jwt from 'jsrsasign'
 
 let id = ''
 if (itemByKey('token')) {
@@ -23,20 +22,19 @@ if (itemByKey('token')) {
 class CreateEvent extends Component {
 
     state = {
-        name: 'name',
-        ageLimit: 21,
-        date: null,
-        description: 'desc',
+        name: 'Name of Event',
+        ageLimit: 0,
+        date: "",
+        description: 'Description',
         kind: [],
-        recurring: false
-
+        recurring: false,
+        fromTime:null,
+        toTime:null,
     }
 
-    handleDateChange = (event, date) => {
-        this.setState({date: date})
+    handleKindChange = (event, index, kind) => {
+        kind.length < 3 ? this.setState({kind}) : alert("Max of 2 kinds per Venue, this helps to optimize searches for users.")
     }
-
-    handleKindChange = (event, index, kind) => this.setState({kind})
 
     kindsOfEvents(kinds) {
         return Kind_Of_Event.map(kind => (
@@ -52,7 +50,7 @@ class CreateEvent extends Component {
 
     render() {
 
-        const {name, ageLimit, date, description, kind, recurring} = this.state
+        const {date, fromTime, toTime, name, ageLimit, description, kind, recurring} = this.state
 
         const {User, loading} = this.props.data
 
@@ -68,7 +66,7 @@ class CreateEvent extends Component {
                 <form onSubmit={e => {
                     e.preventDefault()
                     const venueId = User.venue.id
-                    createEvent(venueId, name, kind, description, ageLimit, recurring)
+                    createEvent(date, fromTime, toTime, venueId, name, kind, description, ageLimit, recurring)
                         .then(e=>window.location.replace('/profile'))
                         .catch(err => console.log(err))
                 }}>
@@ -76,19 +74,44 @@ class CreateEvent extends Component {
                         <input name="name"
                                type="text"
                                placeholder="Name of Event"
-                               value={name}
                                onChange={e => this.setState({name: e.target.value})}
                         />
+                    </fieldset>
+                    <fieldset>
                         <textarea name="description"
-                                  placeholder="Description: Max 272 characters"
-                                  value={description}
+                                  placeholder="Description: Max 280 characters, thats 2 tweets!"
+                                  maxLength={280}
                                   onChange={e => this.setState({description: e.target.value})}
                         />
+                    </fieldset>
+                    <fieldset>
+                        <input name="date"
+                               type="date"
+                               onChange={e => this.setState({date: e.target.value})}
+                        />
+                    </fieldset>
+                    <fieldset>
+                        <label htmlFor="from">From:</label>
+                        <input name="from"
+                               type="time"
+                               onChange={e => this.setState({fromTime: e.target.value})}
+                        />
+                    </fieldset>
+
+                    <fieldset>
+                        <label htmlFor="to">To:</label>
+                        <input name="to"
+                               type="time"
+                               onChange={e => this.setState({toTime: e.target.value})}
+                        />
+                    </fieldset>
+                    <fieldset>
                         <label htmlFor="ageLimit">Age Limit:</label>
                         <input name="ageLimit"
                                type="number"
                                value={ageLimit}
-                               onChange={e => this.setState({ageLimit: parseInt(e.target.value)})}
+                               onChange={e => this.setState({ageLimit: parseInt(e.target.value,10)})}
+                               max={21}
                         />
                     </fieldset>
                     <fieldset>
@@ -102,11 +125,6 @@ class CreateEvent extends Component {
                             {this.kindsOfEvents(kind)}
                         </SelectField>
                     </fieldset>
-
-                    {/*<fieldset>*/}
-                    {/*<DatePicker hintText="When is your event?" value={date} onChange={this.handleDateChange} />*/}
-                    {/*</fieldset>*/}
-
                     <fieldset>
                         <label htmlFor="recurring">Is this event recurring?</label>
                         <input name="recurring"
@@ -116,15 +134,11 @@ class CreateEvent extends Component {
                                onChange={e => this.setState({recurring: e.target.checked})}
                         />
                     </fieldset>
-
                     <fieldset>
                         <button type="submit">Register</button>
                     </fieldset>
                 </form>
-
             </div>
-        );
-    }
-}
+        );}}
 
 export default graphql(getIDs, {options: {variables: {id: id}}})(CreateEvent)

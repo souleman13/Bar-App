@@ -32,13 +32,15 @@ export const createVenueMutation = gql`
     }`
 
 export const createEventMutation = gql`
-    mutation ($venueId:ID, $name:String!, $kind:[Kind_Of_Event!], $description: String,$ageLimit: Int, $recurring: Boolean!){
+    mutation ($date:DateTime, $fromTime:String, $toTime:String, $venueId:ID, $name:String!, $kind:[Kind_Of_Event!], $description: String,$ageLimit: Int, $recurring: Boolean!){
         createEvent(
+            date:$date,
+            fromTime:$fromTime,
+            toTime:$toTime,
             venueId:$venueId,
             name:$name,
             kind:$kind,
             description:$description,
-#            date:$date,
             ageLimit:$ageLimit,
             recurring:$recurring
         ){

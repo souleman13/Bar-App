@@ -2,7 +2,7 @@
  * Created by Douglas on 8/24/2017.
  */
 import React, {Component} from 'react'
-import {createUser, login} from '../../config/Auth/index'
+import {createUser} from '../../config/Auth/index'
 
 
 
@@ -13,7 +13,7 @@ export default class extends Component {
         password: '',
         firstName: '',
         lastName: '',
-        zip: '',
+        zip: 0,
     }
 
     render(){
@@ -44,7 +44,7 @@ export default class extends Component {
                        type="number"
                        placeholder="12345"
                        value={zip}
-                       onChange={e => this.setState({zip: parseInt(e.target.value)})}
+                       onChange={e => this.setState({zip: parseInt(e.target.value,10)})}
                 />
             </fieldset>
 
@@ -62,7 +62,6 @@ export default class extends Component {
                        onChange={e => this.setState({password: e.target.value})}
                 />
             </fieldset>
-
             <fieldset>
                 <button type="submit">Register</button>
             </fieldset>

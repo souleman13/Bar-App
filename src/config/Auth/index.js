@@ -61,10 +61,13 @@ export const createVenue = async (email, password, zip, kind, address, city, sta
     return result
 }
 
-export const createEvent = async (venueId, name, kind, description,ageLimit, recurring) => {
+export const createEvent = async (date, fromTime, toTime, venueId, name, kind, description,ageLimit, recurring) => {
     const result = await Client.mutate({
         mutation: createEventMutation,
         variables: {
+            date,
+            fromTime,
+            toTime,
             venueId,
             name,
             kind,

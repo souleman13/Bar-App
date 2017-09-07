@@ -5,7 +5,7 @@ import React, {Component} from 'react'
 import SelectField from 'material-ui/SelectField'
 import MenuItem from 'material-ui/MenuItem'
 
-import {createVenue, login} from '../../config/Auth/index'
+import {createVenue} from '../../config/Auth/index'
 import {Kind_Of_Venue} from '../../config/GraphQL/enums'
 
 export default class extends Component {
@@ -25,10 +25,13 @@ export default class extends Component {
         ageLimit: 0,
         alcohol: true,
         url: '',
-        phone: ''
+        phone: '',
+        open:true,
     }
 
-    handleKindChange = (event, index, kind) => this.setState({kind})
+    handleKindChange = (event, index, kind) => {
+        kind.length < 3 ? this.setState({kind}) : alert("Max of 2 kinds per Venue, this helps to optimize searches for users.")
+    }
 
     kindsOfVenue(kinds){
         return Kind_Of_Venue.map(kind => (
@@ -51,7 +54,8 @@ export default class extends Component {
             <form onSubmit={e => {
                 e.preventDefault()
                 createVenue(email, password, zip, kind, address, city, state, country, name, ageLimit, alcohol, url, phone)
-                    .then(e => window.location.replace('/login'))
+                    .then(e =>
+                        window.location.replace('/login'))
             }}>
 
                 <h2>New Venue</h2>
@@ -104,13 +108,14 @@ export default class extends Component {
                            type="number"
                            placeholder="12345"
                            value={zip}
-                           onChange={e => this.setState({zip: parseInt(e.target.value)})}
+                           onChange={e => this.setState({zip: parseInt(e.target.value,10)})}
                     />
                     <input name="phone"
                            type="tel"
-                           placeholder="123-456-7890"
+                           placeholder="Phone Number, no dashes or spaces"
                            value={phone}
                            onChange={e => this.setState({phone: e.target.value})}
+                           maxLength={11}
                     />
                     <input name="url"
                            type="url"
@@ -127,6 +132,7 @@ export default class extends Component {
                         hintText="max 2"
                         value={kind}
                         onChange={this.handleKindChange}
+
                     >
                         {this.kindsOfVenue(kind)}
                     </SelectField>
@@ -137,7 +143,7 @@ export default class extends Component {
                     <input name="ageLimit"
                            type="number"
                            value={ageLimit}
-                           onChange={e => this.setState({ageLimit: parseInt(e.target.value)})}
+                           onChange={e => this.setState({ageLimit: parseInt(e.target.value,10)})}
                     />
 
                     <label htmlFor="alcohol">Does this venue serve alcohol?</label>
