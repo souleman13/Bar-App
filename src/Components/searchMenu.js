@@ -11,8 +11,6 @@ import {
 
 export default class extends Component {
 
-
-
     render(){
 
         return(

@@ -49,13 +49,11 @@ export default class extends Component {
 
         const {kind, email, password, zip, address, city, country, state, name, ageLimit, alcohol, url, phone} = this.state
 
-
         return (
             <form onSubmit={e => {
                 e.preventDefault()
                 createVenue(email, password, zip, kind, address, city, state, country, name, ageLimit, alcohol, url, phone)
-                    .then(e =>
-                        window.location.replace('/login'))
+                    .then(e => window.location.replace('/login'))
             }}>
 
                 <h2>New Venue</h2>
@@ -66,13 +64,11 @@ export default class extends Component {
                     <input name="email"
                            type="email"
                            placeholder="example@gmail.com"
-                           value={email}
                            onChange={e => this.setState({email: e.target.value})}
                     />
                     <input name="password"
                            type="password"
                            placeholder="********"
-                           value={password}
                            onChange={e => this.setState({password: e.target.value})}
                     />
                 </fieldset>

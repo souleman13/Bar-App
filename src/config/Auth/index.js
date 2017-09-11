@@ -7,7 +7,6 @@ import {
     createEventMutation
 } from '../GraphQL/mutations'
 
-
 export const createUser = (email, password, firstName, lastName, zip) => {
     Client.mutate({
         mutation: createUserMutation,
