@@ -17,11 +17,13 @@ export default class extends Component {
         const {email, password} = this.state
 
         return(
-            <div>
+            <div className="center">
 
-                <h1>LOGIN PAGE</h1>
-                <form onSubmit={e => {e.preventDefault()
-                    login(email,password)}}>
+                <h1>LOGIN</h1>
+                <form onSubmit={e => {
+                    e.preventDefault()
+                    login(email,password)}}
+                >
                     <fieldset>
                         <input name="email"
                                type="email"
@@ -42,8 +44,6 @@ export default class extends Component {
                         <button type="submit">login</button>
                     </fieldset>
                 </form>
-                <button><a href="/signup">Sign-up</a></button>
-
             </div>
         );
     }

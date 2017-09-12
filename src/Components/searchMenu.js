@@ -15,7 +15,7 @@ export default class extends Component {
 
         return(
 
-            <div>
+            <div style={{padding:10}}>
 
                 <h1>Search Menu</h1>
 

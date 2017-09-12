@@ -12,6 +12,7 @@ import {itemByKey} from '../../config/Auth/storage'
 import {createEvent} from '../../config/Auth/index'
 import {getIDs} from '../../config/GraphQL/query'
 import {graphql} from 'react-apollo'
+import '../../styles/forms.css'
 
 let id = ''
 if (itemByKey('token')) {
@@ -59,11 +60,8 @@ class CreateEvent extends Component {
         }
 
         return (
-            <div>
-
-                <h1>Create Event</h1>
-
-                <form onSubmit={e => {
+                <form
+                    onSubmit={e => {
                     e.preventDefault()
                     const venueId = User.venue.id
                     createEvent(date, fromTime, toTime, venueId, name, kind, description, ageLimit, recurring)
@@ -126,7 +124,7 @@ class CreateEvent extends Component {
                         </SelectField>
                     </fieldset>
                     <fieldset>
-                        <label htmlFor="recurring">Is this event recurring?</label>
+                        <label htmlFor="recurring">Recurring?</label>
                         <input name="recurring"
                                type="checkbox"
                                defaultChecked={recurring}
@@ -138,7 +136,6 @@ class CreateEvent extends Component {
                         <button type="submit">Register</button>
                     </fieldset>
                 </form>
-            </div>
         );}}
 
 export default graphql(getIDs, {options: {variables: {id: id}}})(CreateEvent)

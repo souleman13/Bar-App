@@ -27,6 +27,8 @@ export const getUser = gql`
                     name
                     kind
                     date
+                    toTime
+                    fromTime
                 }
             }}}`
 

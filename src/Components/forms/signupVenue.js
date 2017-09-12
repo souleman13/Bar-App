@@ -8,6 +8,9 @@ import MenuItem from 'material-ui/MenuItem'
 import {createVenue} from '../../config/Auth/index'
 import {Kind_Of_Venue} from '../../config/GraphQL/enums'
 
+import '../../styles/forms.css'
+
+
 export default class extends Component {
 
     state = {

@@ -3,8 +3,7 @@
  */
 import React, {Component} from 'react'
 import {createUser} from '../../config/Auth/index'
-
-
+import '../../styles/forms.css'
 
 export default class extends Component {
 

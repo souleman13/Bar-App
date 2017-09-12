@@ -12,7 +12,7 @@ export default class extends Component {
 
 
         return (
-            <div>
+            <div className="center">
 
                 <SearchBox/>
 

@@ -12,6 +12,17 @@ import { ApolloProvider } from 'react-apollo'
 import theme from 'material-ui/styles/baseThemes/lightBaseTheme'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import getMuiTheme from 'material-ui/styles/getMuiTheme'
+import {blue900, orange500} from 'material-ui/styles/colors'
+
+import './styles/index.css'
+
+const muiTheme = getMuiTheme(theme, {
+    palette: {
+        primary1Color: blue900,
+        accent1Color: orange500,
+    },
+    fontFamily: 'sans-serif',
+});
 
 const Wrapped = (
   <ApolloProvider client={Client}>
@@ -20,7 +31,7 @@ const Wrapped = (
       apiKey="587a194fba4c0e2ce48c15b5ab040912"
       indexName="Venues"
     >
-      <MuiThemeProvider muiTheme={getMuiTheme(theme)}>
+      <MuiThemeProvider muiTheme={muiTheme}>
         <App />
       </MuiThemeProvider>
     </InstantSearch>

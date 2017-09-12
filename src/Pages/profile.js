@@ -4,6 +4,7 @@
 import React, {Component} from 'react';
 import {graphql} from 'react-apollo'
 import jwt from 'jsrsasign'
+import Paper from 'material-ui/Paper'
 
 import {itemByKey} from '../config/Auth/storage'
 import {getUser} from '../config/GraphQL/query'
@@ -14,6 +15,7 @@ if (itemByKey('token')) {
     const decoded = jwt.jws.JWS.parse(itemByKey('token'))
     id = decoded.payloadObj.userId
 }
+
 
 class profile extends Component {
 
@@ -37,29 +39,26 @@ class profile extends Component {
             events = venue.events
         }
 
-
         return (
-            <div>
-
+            <div className="center">
                 <h1>Profile</h1>
                 {
                     User.venue ?
                         <div>
-                            <div>{venue.name}</div>
-                            <div>{User.email}</div>
-                            <div>{venue.kind.join(' ')}</div>
-                            <div>{venue.url}</div>
-                            <div>{venue.phone}</div>
-                            <div>{venue.address}</div>
+                            <div>Name: {venue.name}</div>
+                            <div>Email: {User.email}</div>
+                            <div>{venue.kind.join(', ')}</div>
+                            <div>Website: {venue.url}</div>
+                            <div>Phone: {venue.phone}</div>
+                            <div>Address: {venue.address}</div>
                             <div>{venue.city}</div>
                             <div>{venue.state}</div>
                             <div>{venue.zip}</div>
-                            <div>{venue.ageLimit}</div>
+                            <div>Age Limit: {venue.ageLimit}</div>
                             <div>
                                 <label htmlFor="alcohol">Does this venue serve alcohol?</label>
-                                <input name="alcohol" type="checkbox" defaultChecked={venue.alcohol}/>
+                                <input name="alcohol" type="checkbox" defaultChecked={venue.alcohol} disabled={true}/>
                             </div>
-                            <button>edit</button>
                             <h4>Events:</h4>
                             <button onClick={e => window.location.replace('/event')}>Create Event</button>
                             <hr/>
@@ -68,15 +67,13 @@ class profile extends Component {
                                     <div>
                                         {
                                             events.map(event => (
-                                                <div key={event.id}>
+                                                <Paper key={event.id} zDepth={3} style={{margin:5}}>
                                                     <div>{event.name}</div>
                                                     <div>{event.kind.join(' ')}</div>
                                                     <div>{event.date ? event.date.split('T',1):null}</div>
-                                                    <div>From: {}</div>
-                                                    <div>To: {}</div>
-                                                    <button>edit</button>
-                                                    <hr/>
-                                                </div>
+                                                    <div>From: {event.fromTime}</div>
+                                                    <div>To: {event.toTime}</div>
+                                                </Paper>
                                             ))
                                         }
                                     </div> : <div>You have no events!</div>
